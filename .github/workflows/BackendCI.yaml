@@ -1,0 +1,21 @@
+name: TASK-MANAGEMENT-BACKEND | CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-lint:
+    name: Test and List
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run Test
+        run: python manage.py test
+
+      - name: Run Lint
+        run: flake8
