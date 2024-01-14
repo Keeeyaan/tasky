@@ -4,3 +4,4 @@ django-cors-headers
 psycopg2
 psycopg2-binary  
 flake8 
+python-dotenv
