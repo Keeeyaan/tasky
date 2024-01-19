@@ -11,7 +11,7 @@ export default function Home() {
         <Image src="/logo.png" width={50} height={50} alt="logo" />
         <p className="text-3xl font-bold text-primary">TaskEase</p>
       </nav>
-      <div className="gap-10 mb-12 text-center md:text-start mt-28 sm:mt-38 flex flex-col sm:flex-row items-center justify-center ">
+      <div className="gap-12 mb-12 text-center md:text-start mt-28 sm:mt-38 flex flex-col sm:flex-row items-center justify-center ">
         <div>
           <h1 className="max-w-2xl text-5xl font-bold md:text-6xl lg:text-7xl">
             Task Management Made <span className="text-primary">Simple</span>.
