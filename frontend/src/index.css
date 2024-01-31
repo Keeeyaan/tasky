@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -49,7 +50,6 @@
     --ring: 263.4 70% 50.4%;
   }
 }
-
  
 @layer base {
   * {
@@ -60,12 +60,11 @@
   }
 }
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--font-poppins);
+  font-family: "Poppins", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   scroll-behavior: smooth;
   text-decoration: none;
   list-style: none;

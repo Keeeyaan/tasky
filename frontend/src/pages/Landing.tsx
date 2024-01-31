@@ -1,15 +1,13 @@
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
 
 import Wrapper from "@/components/Wrapper";
 import { buttonVariants } from "@/components/ui/button";
 
-export default function Home() {
+const Landing = () => {
   return (
-    <Wrapper className="">
-      <nav className="flex py-8 items-center gap-4">
-        <Image src="/logo.png" width={50} height={50} alt="logo" />
-        <p className="text-3xl font-bold text-primary">TaskEase</p>
+    <Wrapper title="Landing Page">
+      <nav className="flex py-4 items-center gap-4">
+        <p className="text-3xl font-bold text-primary">Tasky</p>
       </nav>
       <div className="gap-12 mb-12 text-center md:text-start mt-28 sm:mt-38 flex flex-col sm:flex-row items-center justify-center ">
         <div>
@@ -26,7 +24,7 @@ export default function Home() {
               size: "sm",
               className: "mr-5 mt-5 mb-2 bg-primary hover:bg-primary py-6",
             })}
-            href="/register"
+            to="/register"
           >
             Register
           </Link>
@@ -35,19 +33,19 @@ export default function Home() {
               size: "sm",
               className: "mt-5 mb-2 bg-primary hover:bg-primary p-6",
             })}
-            href="/login"
+            to="/login"
           >
             Login / Demo User
           </Link>
         </div>
-        <Image
-          src="landing_page.svg"
-          width={500}
-          height={500}
-          alt="landing page logo"
+        <img
+          src="./landing_page.svg"
+          alt="landing page"
           className="hidden md:block md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px]"
         />
       </div>
     </Wrapper>
   );
-}
+};
+
+export default Landing;
