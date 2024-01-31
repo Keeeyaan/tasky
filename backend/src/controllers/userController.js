@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { StatusCodes } from "http-status-codes";
 
-import asyncErrorHandler from "../utils/asyncErrorHandler.js";
+import asyncErrorHandler from "../utils/AsyncErrorHandler.js";
 
 const prisma = new PrismaClient();
 
