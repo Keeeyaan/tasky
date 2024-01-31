@@ -23,11 +23,12 @@ app.use("/api/v1", routes);
 
 // throw error on non existing api routes
 app.use("*", (req, res, next) => {
-  const error = new CustomError(
-    `Could not find ${req.originalUrl} route on the server!`,
-    StatusCodes.NOT_FOUND
+  next(
+    new CustomError(
+      `Could not find ${req.originalUrl} route on the server!`,
+      StatusCodes.NOT_FOUND
+    )
   );
-  next(error);
 });
 
 app.use(errorHandlerMiddleware);
