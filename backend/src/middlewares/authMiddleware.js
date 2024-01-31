@@ -8,7 +8,7 @@ export const authenticateUserToken = async (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token)
-    return next(new CustomError("Access denied!", StatusCodes.UNAUTHORIZED));
+    return next(new CustomError("Unathorized!", StatusCodes.UNAUTHORIZED));
 
   try {
     const { userId } = verifyAccessToken(token);
@@ -19,7 +19,7 @@ export const authenticateUserToken = async (req, res, next) => {
 
     next();
   } catch (err) {
-    const error = new CustomError("Invalid token!", StatusCodes.UNAUTHORIZED);
+    const error = new CustomError("Forbidden!", StatusCodes.FORBIDDEN);
     next(error);
   }
 };
