@@ -1,6 +1,6 @@
 import http from "http";
 import app from "./src/app.js";
-import logger from "./src/logger/index.js";
+import logger from "./src/utils/Logger.js";
 
 const server = http.createServer(app);
 

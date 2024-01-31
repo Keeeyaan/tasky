@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import logger from "../logger/index.js";
+import logger from "../utils/Logger.js";
 
 const errorHandlerMiddleware = (err, req, res, next) => {
   logger.error(err);
