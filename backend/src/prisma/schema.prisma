@@ -19,21 +19,29 @@ model User {
 }
 
 model Task {
-  id        Int       @id @default(autoincrement())
-  title     String?   @db.VarChar(255)
-  content   String?   @db.VarChar(1032)
-  priority  Priority? @default(LOW)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  User      User?     @relation(fields: [userId], references: [id])
-  userId    Int
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String    @db.VarChar(1024)
+  priority    Priority? @default(low)
+  status      Status?   @default(started)
+  tag         String?   @db.VarChar(128)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  User        User      @relation(fields: [userId], references: [id])
+  userId      Int
 }
 
 enum Priority {
-  URGENT
-  HIGH
-  NORMAL
-  LOW
+  urgent
+  high
+  normal
+  low
+}
+
+enum Status {
+  started
+  in_progress
+  completed
 }
 
 model RefreshToken {
