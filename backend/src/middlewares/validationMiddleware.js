@@ -12,10 +12,7 @@ export const mapValidationErrors = (validateValues) => {
 
         if (errorMessages[0].startsWith("Unauthorized!")) {
           return next(
-            new CustomError(
-              "Not authorized to access this route!",
-              StatusCodes.UNAUTHORIZED
-            )
+            new CustomError("Unauthorized Access!", StatusCodes.UNAUTHORIZED)
           );
         }
 
