@@ -14,7 +14,6 @@ const loginLimiter = rateLimit({
       `Too Many Request: ${options.message.message}\t${req.method}\t${req.url}\t${req.headers.origin}`
     );
     next(new CustomError(options.message, options.statusCode));
-    // res.status(options.statusCode).send(options.message);
   },
   standardHeaders: true,
   legacyHeaders: false,
