@@ -19,7 +19,7 @@ export const authenticateUserToken = async (req, res, next) => {
 
     next();
   } catch (err) {
-    const error = new CustomError("Forbidden!", StatusCodes.FORBIDDEN);
+    const error = new CustomError("Forbidden Access!", StatusCodes.FORBIDDEN);
     next(error);
   }
 };
