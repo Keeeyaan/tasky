@@ -42,5 +42,9 @@ export const validateLogin = mapValidationErrors([
 ]);
 
 export const validateRefreshToken = mapValidationErrors([
-  cookie("token").notEmpty().withMessage("Unauthorized!").isJWT(),
+  cookie("token")
+    .notEmpty()
+    .withMessage("Unauthorized!")
+    .isJWT()
+    .withMessage("Unathorized"),
 ]);
