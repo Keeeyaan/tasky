@@ -64,7 +64,9 @@ export const login = asyncErrorHandler(async (req, res, next) => {
     });
 
   const accessToken = createAccessToken({ userId: user.id });
-  const refreshToken = createRefreshToken({ userId: user.id });
+  const refreshToken = createRefreshToken({
+    userId: user.id,
+  });
 
   // Create secure cookie with refresh token
   res.cookie("token", refreshToken, {
@@ -131,7 +133,7 @@ export const logout = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-export const refreshToken = asyncErrorHandler(async (req, res) => {
+export const refreshToken = asyncErrorHandler(async (req, res, next) => {
   const { token } = matchedData(req);
 
   const { userId } = verifyRefreshToken(token);
