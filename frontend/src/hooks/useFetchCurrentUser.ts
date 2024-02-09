@@ -6,6 +6,9 @@ const useFetchCurrentUser = () => {
   return useQuery({
     queryKey: ["user"],
     queryFn: getCurrentUser,
+    select: (data) => {
+      return data.user;
+    },
   });
 };
 
