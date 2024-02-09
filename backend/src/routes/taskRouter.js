@@ -1,18 +1,21 @@
 import { Router } from "express";
 
 import { createTask, updateTaskById } from "../controllers/taskController.js";
-import { validateCreateUpdateTask } from "../validations/taskValidation.js";
+import {
+  validateCreateTask,
+  validateUpdateTask,
+} from "../validations/taskValidation.js";
 
 const router = Router();
 
 router
   .route("/")
   .get(() => {})
-  .post(validateCreateUpdateTask, createTask);
+  .post(validateCreateTask, createTask);
 
 router
   .route("/:taskId")
-  .patch(validateCreateUpdateTask, updateTaskById)
+  .patch(validateUpdateTask, updateTaskById)
   .delete(() => {});
 
 export default router;
