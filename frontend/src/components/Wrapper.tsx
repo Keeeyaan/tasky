@@ -4,10 +4,12 @@ import { cn } from "@/lib/utils";
 const Wrapper = ({
   className,
   title,
+  norMargin,
   children,
 }: {
   className?: string;
   title?: string;
+  norMargin?: boolean;
   children: ReactNode;
 }) => {
   useEffect(() => {
@@ -16,11 +18,16 @@ const Wrapper = ({
   }, [title]);
 
   return (
-    <div
-      className={cn("w-full mx-auto px-4 md:px-40 max-screen-xl", className)}
+    <main
+      className={cn(
+        `${
+          norMargin ? "md:px-10" : "md:px-40"
+        } w-full mx-auto px-4  max-screen-xl`,
+        className
+      )}
     >
       {children}
-    </div>
+    </main>
   );
 };
 
