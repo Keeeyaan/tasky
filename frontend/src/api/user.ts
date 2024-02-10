@@ -4,7 +4,7 @@ import { IGetCurrentUserResponse } from "@/types";
 
 export async function getCurrentUser() {
   const response = await axiosPrivate.get<IGetCurrentUserResponse>(
-    `user/current`
+    `users/current`
   );
   return response.data;
 }
