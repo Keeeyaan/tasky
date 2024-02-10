@@ -1,8 +1,16 @@
 import { Router } from "express";
 
-import { createTask, updateTaskById } from "../controllers/taskController.js";
+import {
+  getCurrentUserTasks,
+  createTask,
+  updateTaskById,
+  deleteTaskById,
+} from "../controllers/taskController.js";
+
 import {
   validateCreateTask,
+  validateDeleteTask,
+  validateGetCurrentUserTasks,
   validateUpdateTask,
 } from "../validations/taskValidation.js";
 
@@ -13,9 +21,11 @@ router
   .get(() => {})
   .post(validateCreateTask, createTask);
 
+router.route("/current").get(validateGetCurrentUserTasks, getCurrentUserTasks);
+
 router
   .route("/:taskId")
   .patch(validateUpdateTask, updateTaskById)
-  .delete(() => {});
+  .delete(validateDeleteTask, deleteTaskById);
 
 export default router;

@@ -1,5 +1,11 @@
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 import { mapValidationErrors } from "../middlewares/validationMiddleware.js";
+
+export const validateGetCurrentUserTasks = mapValidationErrors([
+  query("status")
+    .isIn(["started", "in_progress", "completed", ""])
+    .withMessage("Invalid query params"),
+]);
 
 export const validateCreateTask = mapValidationErrors([
   body("title").notEmpty().withMessage("Task title is required!"),
@@ -24,4 +30,8 @@ export const validateUpdateTask = mapValidationErrors([
   body("priority"),
   body("status"),
   body("tag"),
+]);
+
+export const validateDeleteTask = mapValidationErrors([
+  param("taskId").notEmpty().withMessage("Task ID is required!"),
 ]);
