@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 const Landing = () => {
   const { auth } = useStore();
 
-  return auth.accessToken ? (
+  return !auth.accessToken ? (
     <Wrapper title="Landing Page">
       <div className="gap-12 mb-12 text-center md:text-start mt-28 sm:mt-38 flex flex-col sm:flex-row items-center justify-center ">
         <div>
@@ -15,9 +15,9 @@ const Landing = () => {
             Task Management Made <span className="text-primary">Simple</span>.
           </h1>
           <p className="mt-5 max-w-prose text-zinc-700 sm:text-lg">
-            Effortlessly organize your work, collaborate with your team, and
-            boost productivity with Tasky. From simple to-do lists to complex
-            project workflows, we've got you covered.
+            Simplify Your Task Management. Effortlessly organize, prioritize,
+            and track your tasks with Tasky – your intuitive task management
+            solution.
           </p>
           <Link
             className={buttonVariants({
