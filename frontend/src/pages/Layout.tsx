@@ -1,11 +1,18 @@
 import { Outlet } from "react-router-dom";
 
-const Layout = () => {
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const HomeLayout = () => {
   return (
-    <div className="min-h-screen antialiased grainy">
-      <Outlet />
-    </div>
+    <main className="flex flex-col">
+      <Navbar />
+      <div className="min-h-screen antialiased grainy">
+        <Outlet />
+      </div>
+      <Footer />
+    </main>
   );
 };
 
-export default Layout;
+export default HomeLayout;
