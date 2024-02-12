@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
+import { useStore } from "@/store";
 import Wrapper from "@/components/Wrapper";
 import { buttonVariants } from "@/components/ui/button";
 
 const Landing = () => {
-  return (
+  const { auth } = useStore();
+
+  return auth.accessToken ? (
     <Wrapper title="Landing Page">
-      <nav className="flex py-4 items-center gap-4">
-        <p className="text-3xl font-bold text-primary">Tasky</p>
-      </nav>
       <div className="gap-12 mb-12 text-center md:text-start mt-28 sm:mt-38 flex flex-col sm:flex-row items-center justify-center ">
         <div>
           <h1 className="max-w-2xl text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -16,7 +16,7 @@ const Landing = () => {
           </h1>
           <p className="mt-5 max-w-prose text-zinc-700 sm:text-lg">
             Effortlessly organize your work, collaborate with your team, and
-            boost productivity with TaskEase. From simple to-do lists to complex
+            boost productivity with Tasky. From simple to-do lists to complex
             project workflows, we've got you covered.
           </p>
           <Link
@@ -45,6 +45,8 @@ const Landing = () => {
         />
       </div>
     </Wrapper>
+  ) : (
+    <Navigate to="/dashboard" replace />
   );
 };
 
