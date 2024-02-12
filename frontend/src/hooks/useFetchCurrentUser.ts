@@ -7,7 +7,17 @@ const useFetchCurrentUser = () => {
     queryKey: ["user"],
     queryFn: getCurrentUser,
     select: (data) => {
-      return data.user;
+      const startedTask = data.user.tasks.filter(
+        (task) => task.status === "started"
+      );
+      const inProgressTask = data.user.tasks.filter(
+        (task) => task.status === "in_progress"
+      );
+      const completedTask = data.user.tasks.filter(
+        (task) => task.status === "completed"
+      );
+
+      return { user: data.user, startedTask, inProgressTask, completedTask };
     },
   });
 };
