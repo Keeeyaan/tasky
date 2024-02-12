@@ -14,7 +14,7 @@ export const useCreateTask = () => {
     mutationFn: createTask,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["task"],
+        queryKey: ["user"],
       });
       toast({
         title: "Task Created!",
