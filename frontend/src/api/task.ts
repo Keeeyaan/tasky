@@ -1,15 +1,15 @@
-import { axiosPrivate } from "./auth";
+import { axiosPrivate } from "@/components/AxiosInterceptor";
 
 import { IGenericResponse } from "@/types";
 
 export type UpdateTaskByIdProps = {
   id: number;
   data: {
-    title: string;
-    description: string;
-    tag: string;
-    priority: "low" | "normal" | "high" | "urgent";
-    status: "started" | "in_progress" | "completed";
+    title?: string;
+    description?: string;
+    tag?: string;
+    priority?: "low" | "normal" | "high" | "urgent";
+    status?: "started" | "in_progress" | "completed" | string;
   };
 };
 
@@ -31,5 +31,10 @@ export const updateTaskById = async ({ id, data }: UpdateTaskByIdProps) => {
     `tasks/${id}`,
     data
   );
+  return response.data;
+};
+
+export const deleteTaskById = async (id: string) => {
+  const response = await axiosPrivate.delete<IGenericResponse>(`tasks/${id}`);
   return response.data;
 };
