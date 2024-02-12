@@ -1,32 +1,46 @@
 import { useStore } from "@/store";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import logo from "@/assets/logo.png";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Separator } from "./ui/separator";
+
+const SmallSB = () => {
+  return (
+    <div>
+      <CardHeader className="p-5 flex items-center flex-col">
+        <img src="/logo.png" className="w-[40px] h-[40[px]" />
+      </CardHeader>
+      <Separator />
+      <CardContent></CardContent>
+    </div>
+  );
+};
+
+const BigSB = () => {
+  return (
+    <div>
+      <CardHeader className="p-5">
+        <div className="flex items-center gap-2">
+          <img src="/logo.png" className="w-[40px] h-[40[px]" />
+          <CardTitle>Tasky</CardTitle>
+        </div>
+      </CardHeader>
+      <Separator />
+      <CardContent></CardContent>
+    </div>
+  );
+};
 
 const Sidebar = () => {
   const { sidebarIsClosed } = useStore();
 
   return (
-    <Card
-      className={`${
-        sidebarIsClosed ? "min-w-[100px]" : "min-w-[300px]"
-      } sticky rounded-none transition-all grid ease-in-out duration-300`}
-    >
-      <div>
-        <CardHeader>
-          <div className="flex items-center gap-2">
-            <img src={logo} className="w-[40px] h-[40[px]" />
-            <CardTitle>Tasky</CardTitle>
-          </div>
-        </CardHeader>
-        <CardContent>hehe</CardContent>
+    <Card className="rounded-none">
+      <div
+        className={`${
+          sidebarIsClosed ? "w-[80px]" : "w-[280px]"
+        } sticky transition-all ease-in-out duration-300`}
+      >
+        {sidebarIsClosed ? <SmallSB /> : <BigSB />}
       </div>
-      <CardFooter>footer</CardFooter>
     </Card>
   );
 };
