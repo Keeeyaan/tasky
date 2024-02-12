@@ -11,7 +11,7 @@ import {
 } from "@/types";
 
 export async function login(data: ILoginProp) {
-  const response = await axios.post<IGenericResponse>(`auth/login`, data);
+  const response = await axios.post<ILoginRefreshResponse>(`auth/login`, data);
   return response.data;
 }
 
