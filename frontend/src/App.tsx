@@ -20,7 +20,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Landing />,
+        element: (
+          <PersistLogin>
+            <Landing />
+          </PersistLogin>
+        ),
       },
       {
         path: "login",
