@@ -20,6 +20,11 @@ export async function register(data: IRegisterProp) {
   return response.data;
 }
 
+export async function logout() {
+  const response = await axios.delete<IGenericResponse>(`auth/logout`);
+  return response.data;
+}
+
 export async function refreshAccessToken() {
   const response = await axios.get<ILoginRefreshResponse>("auth/refresh");
   return response.data;
