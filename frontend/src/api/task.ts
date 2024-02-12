@@ -34,7 +34,7 @@ export const updateTaskById = async ({ id, data }: UpdateTaskByIdProps) => {
   return response.data;
 };
 
-export const deleteTaskById = async (id: string) => {
+export const deleteTaskById = async (id: number) => {
   const response = await axiosPrivate.delete<IGenericResponse>(`tasks/${id}`);
   return response.data;
 };
