@@ -1,4 +1,4 @@
-import { Bell, Calendar, PanelRightOpen } from "lucide-react";
+import { Bell, Calendar, PanelRightOpen, PanelLeftOpen } from "lucide-react";
 
 import { useStore } from "@/store";
 
@@ -8,14 +8,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
 const Topbar = () => {
-  const { setSidebarIsClosed } = useStore();
+  const { setSidebarIsClosed, sidebarIsClosed } = useStore();
 
   return (
     <Card className="sticky inset-x-0 top-0 z-30 border-t-0 border-x-0 w-full rounded-none backdrop-blur-lg transition-all">
       <div className="w-full h-full flex items-center px-6 py-5 justify-between">
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" className="px-2">
-            <PanelRightOpen onClick={setSidebarIsClosed} />
+            {sidebarIsClosed ? (
+              <PanelLeftOpen onClick={setSidebarIsClosed} />
+            ) : (
+              <PanelRightOpen onClick={setSidebarIsClosed} />
+            )}
           </Button>
           <SearchInput type="text" placeholder="Search" />
         </div>
