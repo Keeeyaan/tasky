@@ -12,8 +12,6 @@ import { Separator } from "@/components/ui/separator";
 const Task = () => {
   const { data, isPending, isError } = useFetchCurrentUser();
 
-  console.log(data);
-
   return (
     <Wrapper norMargin title="Task">
       <Card className="inline-block">
