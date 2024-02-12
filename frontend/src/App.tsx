@@ -1,6 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Layout, Landing, Login, Register, Error } from "./pages";
+import ProtectedRoute from "./components/ProtectedRoute";
+import {
+  Layout,
+  Error,
+  Landing,
+  Login,
+  Register,
+  DashboardLayout,
+  Task,
+} from "./pages";
+import PersistLogin from "./components/PersistLogin";
 
 const router = createBrowserRouter([
   {
@@ -13,12 +23,28 @@ const router = createBrowserRouter([
         element: <Landing />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PersistLogin>
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          </PersistLogin>
+        ),
+        children: [
+          {
+            index: true,
+            element: <Task />,
+          },
+        ],
       },
     ],
   },
