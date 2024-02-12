@@ -4,7 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { updateTaskById } from "@/api/task";
 
-export const useUpdateTaskId = () => {
+const useUpdateTaskId = () => {
   const queryClient = useQueryClient();
 
   const { toast } = useToast();
@@ -14,7 +14,7 @@ export const useUpdateTaskId = () => {
     mutationFn: updateTaskById,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["task"],
+        queryKey: ["user"],
       });
       toast({
         title: "Task Updated!",
