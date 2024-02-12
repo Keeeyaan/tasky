@@ -20,7 +20,7 @@ const PersistLogin = ({ children }: { children: ReactNode }) => {
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  return <>{isLoading ? <p>Loading...</p> : children}</>;
+  return isLoading ? <p>Loading...</p> : children;
 };
 
 export default PersistLogin;
