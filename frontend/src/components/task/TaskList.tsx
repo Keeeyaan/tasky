@@ -1,20 +1,29 @@
-import { cn } from "@/lib/utils";
 import TaskCard from "./TaskCard";
 
 import { ITask } from "@/types";
+import { Draggable } from "react-beautiful-dnd";
 
 type TaskListProps = {
-  className?: string;
-  tasks: ITask[];
+  tasks: ITask[] | [];
 };
 
-const TaskList = ({ className, tasks }: TaskListProps) => {
+const TaskList = ({ tasks }: TaskListProps) => {
   return (
-    <div className={cn("", className)}>
-      {tasks.map((task) => {
-        return <TaskCard key={task.id} task={task} />;
-      })}
-    </div>
+    <>
+      {tasks.map((task, index) => (
+        <Draggable key={task.id} draggableId={task.id.toString()} index={index}>
+          {(provided) => (
+            <div
+              {...provided.dragHandleProps}
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+            >
+              <TaskCard task={task} />
+            </div>
+          )}
+        </Draggable>
+      ))}
+    </>
   );
 };
 
