@@ -38,9 +38,11 @@ const TaskCard = ({ task }: TaskCardProps) => {
           <Badge variant={task.priority} text={task.priority} />
         </div>
       </CardHeader>
-      <CardContent className="space-y-2 px-4 pb-4">
-        <CardTitle>{task.title}</CardTitle>
-        <CardDescription>{task.description}</CardDescription>
+      <CardContent className="space-y-2 px-4 pb-8">
+        <CardTitle className="text-xl leading-none">{task.title}</CardTitle>
+        <CardDescription className="font-light">
+          {task.description}
+        </CardDescription>
       </CardContent>
       <Separator />
       <CardFooter className="p-4 justify-between items-center">
