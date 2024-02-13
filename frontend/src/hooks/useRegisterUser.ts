@@ -21,6 +21,7 @@ export const useRegisterUser = () => {
         description: "You may now login",
       });
     },
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       toast({
         title: "Opps.. Error on register. Try again!",

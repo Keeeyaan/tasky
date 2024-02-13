@@ -21,6 +21,7 @@ const useDeleteTaskId = () => {
         description: data.message,
       });
     },
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       toast({
         title: "Opps.. Error on delete. Try again!",

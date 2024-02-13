@@ -24,6 +24,7 @@ const useLogoutUser = () => {
       });
       navigate("/", { replace: true });
     },
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       toast({
         title: "Opps.. Error on logout. Try again!",

@@ -21,6 +21,7 @@ export const useCreateTask = () => {
         description: data.message,
       });
     },
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       toast({
         title: "Opps.. Error on create. Try again!",
