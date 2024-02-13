@@ -11,7 +11,7 @@
     "prettier:write": "prettier ./src --write",
     "prettier:check": "prettier ./src --check",
     "preview": "vite preview",
-    "prepare": "cd .. && husky ./frontend/.husky"
+    "prepare": "cd .. && husky frontend/.husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
