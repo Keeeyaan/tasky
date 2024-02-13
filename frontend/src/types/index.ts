@@ -25,7 +25,7 @@ export interface IGetCurrentUserResponse {
         status: "started" | "in_progress" | "completed";
         createdAt: Date;
         updatedAt: Date;
-      }
+      },
     ];
   };
 }
