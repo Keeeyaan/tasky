@@ -3,6 +3,7 @@ import { useStore } from "@/store";
 import { ReactNode, useEffect } from "react";
 import { useRefreshToken } from "../hooks/useRefreshToken";
 
+/* eslint-disable-next-line react-refresh/only-export-components*/
 export const axiosPrivate = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
