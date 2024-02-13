@@ -33,5 +33,5 @@ jobs:
         run: npm run prettier:check
 
       - name: Build Code
-        working-directory: frontend/psits_frontend
+        working-directory: frontend/frontend
         run: npm run build
