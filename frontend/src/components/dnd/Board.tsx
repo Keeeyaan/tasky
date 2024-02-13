@@ -29,6 +29,12 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
     setNewCompletedTask(completedTask);
   }, [startedTask, inProgressTask, completedTask]);
 
+  const droppableColumn = [
+    { title: "Started", id: "started", data: newStartedTask },
+    { title: "In Progress", id: "in_progress", data: newInProgressTask },
+    { title: "Completed", id: "completed", data: newCompletedTask },
+  ];
+
   const handleOnDragEnd = (results: DropResult) => {
     const { source, destination } = results;
 
@@ -107,7 +113,14 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
       // update the data status
       const data = { ...getList(source.droppableId)[source.index] };
-      data.status = destination.droppableId;
+      const status =
+        destination.droppableId === "started"
+          ? "started"
+          : destination.droppableId === "in_progress"
+            ? "in_progress"
+            : "completed";
+
+      data.status = status;
       updateStatus({
         id: data.id,
         data,
@@ -118,25 +131,27 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className="flex gap-2">
-        <div className="space-y-2 w-[350px]">
-          <h2 className="flex-grow text-muted-foreground font-medium text-base">
-            Started
-          </h2>
-          <Droppable droppableId="started" type="group">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="space-y-2"
-              >
-                <TaskList tasks={newStartedTask} />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
+        {droppableColumn.map((col) => (
+          <div key={col.id} className="space-y-2 w-[350px]">
+            <h2 className="flex-grow text-muted-foreground font-medium text-base">
+              {col.title}
+            </h2>
+            <Droppable droppableId={col.id} type="group">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="space-y-2"
+                >
+                  <TaskList tasks={col.data} />
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        ))}
 
-        <div className="space-y-2 w-[350px]">
+        {/* <div className="space-y-2 w-[350px]">
           <h2 className="flex-grow text-muted-foreground font-medium text-base">
             In Progress
           </h2>
@@ -170,7 +185,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
               </div>
             )}
           </Droppable>
-        </div>
+        </div> */}
       </div>
     </DragDropContext>
   );

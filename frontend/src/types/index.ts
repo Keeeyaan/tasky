@@ -36,7 +36,7 @@ export interface ITask {
   description: string;
   tag: string;
   priority: "low" | "normal" | "high" | "urgent";
-  status: "started" | "in_progress" | "completed" | string;
+  status: "started" | "in_progress" | "completed";
   createdAt: Date;
   updatedAt: Date;
 }
