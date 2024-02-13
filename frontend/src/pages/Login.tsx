@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import LoginForm from "@/components/form/LoginForm";
-import logo from "@/assets/logo.png";
 import Wrapper from "@/components/Wrapper";
 import {
   Card,
@@ -21,7 +20,7 @@ const Login = () => {
       <Card className="w-[400px]">
         <CardHeader>
           <div className="flex justify-center items-center gap-2 mb-2">
-            <img src={logo} className="w-[50px] h-[50px] mb-2" />
+            <img src="/logo.png" className="w-[50px] h-[50px] mb-2" />
             <h1 className="font-semibold text-3xl">Tasky</h1>
           </div>
           <CardTitle>Login</CardTitle>

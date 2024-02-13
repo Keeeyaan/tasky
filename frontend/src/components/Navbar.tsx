@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
 
 const ROUTE = ["/dashboard"];
 
@@ -25,7 +24,7 @@ const Navbar = () => {
             <img
               className="w-[40px] h-[40px]"
               alt="linkedlist logo"
-              src={logo}
+              src="/logo.png"
             />
             <span>Tasky</span>
           </Link>

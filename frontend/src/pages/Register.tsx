@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-import logo from "@/assets/logo.png";
 import Wrapper from "@/components/Wrapper";
 import RegisterForm from "@/components/form/RegisterForm";
 import {
@@ -21,7 +20,7 @@ const Register = () => {
       <Card className="w-[450px]">
         <CardHeader>
           <div className="flex justify-center items-center gap-2 mb-2">
-            <img src={logo} className="w-[50px] h-[50px] mb-2" />
+            <img src="/logo.png" className="w-[50px] h-[50px] mb-2" />
             <h1 className="font-semibold text-3xl">Tasky</h1>
           </div>
           <CardTitle>Register</CardTitle>
