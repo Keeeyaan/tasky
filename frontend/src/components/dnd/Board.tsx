@@ -24,9 +24,69 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
   const { mutate: updateStatus } = useUpdateTaskId();
 
   useEffect(() => {
-    setNewStartedTask(startedTask);
-    setNewInProgressTask(inProgressTask);
-    setNewCompletedTask(completedTask);
+    const arrayIdsOrder = JSON.parse(localStorage.getItem("tasky-order")!);
+
+    if (
+      !arrayIdsOrder &&
+      startedTask.length &&
+      inProgressTask.length &&
+      completedTask.length
+    ) {
+      const startedTaskIdsOrderArray = startedTask.map((task) => task.id);
+      const inProgressTaskIdsOrderArray = inProgressTask.map((task) => task.id);
+      const completedTaskIdsOrderArray = completedTask.map((task) => task.id);
+
+      const dataOrder = {
+        started: startedTaskIdsOrderArray,
+        in_progress: inProgressTaskIdsOrderArray,
+        completed: completedTaskIdsOrderArray,
+      };
+      localStorage.setItem("tasky-order", JSON.stringify(dataOrder));
+    }
+
+    let startedArray;
+    let inProgressArray;
+    let completedArray;
+
+    if (
+      arrayIdsOrder &&
+      startedTask.length &&
+      inProgressTask.length &&
+      completedTask.length
+    ) {
+      startedArray = arrayIdsOrder.started.map((pos: number) => {
+        return startedTask.find((el) => el.id === pos);
+      });
+      inProgressArray = arrayIdsOrder.in_progress.map((pos: number) => {
+        return inProgressTask.find((el) => el.id === pos);
+      });
+      completedArray = arrayIdsOrder.completed.map((pos: number) => {
+        return completedTask.find((el) => el.id === pos);
+      });
+
+      const newStartedItems = startedTask.filter((el) => {
+        return !arrayIdsOrder.started.includes(el.id);
+      });
+      const newInProgressItems = inProgressTask.filter((el) => {
+        return !arrayIdsOrder.in_progress.includes(el.id);
+      });
+      const newCompletedItems = completedTask.filter((el) => {
+        return !arrayIdsOrder.completed.includes(el.id);
+      });
+
+      if (newStartedItems.length)
+        startedArray = [...newStartedItems, ...startedArray];
+
+      if (newInProgressItems.length)
+        inProgressArray = [...newInProgressItems, ...inProgressArray];
+
+      if (newCompletedItems.length)
+        completedArray = [...newCompletedItems, ...completedArray];
+    }
+
+    setNewStartedTask(startedArray || startedTask);
+    setNewInProgressTask(inProgressArray || inProgressTask);
+    setNewCompletedTask(completedArray || completedTask);
   }, [startedTask, inProgressTask, completedTask]);
 
   const droppableColumn = [
@@ -62,7 +122,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
     if (source.droppableId === destination.droppableId) {
       const itemList = getList(source.droppableId);
 
-      const updatedList = reorder(itemList, source.index, destination.index);
+      const updatedList = reorder(itemList, source, destination);
 
       switch (source.droppableId) {
         case "started":
@@ -84,6 +144,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
         source,
         destination
       );
+
       switch (source.droppableId) {
         case "started":
           setNewStartedTask(result.started);
