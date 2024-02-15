@@ -172,7 +172,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
           break;
       }
 
-      // update the data status
+      // updating the data status on the database
       const data = { ...getList(source.droppableId)[source.index] };
       const status =
         destination.droppableId === "started"
@@ -191,7 +191,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         {droppableColumn.map((col) => (
           <div key={col.id} className="space-y-2 w-[350px]">
             <h2 className="flex-grow text-muted-foreground font-medium text-base">
@@ -211,42 +211,6 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
             </Droppable>
           </div>
         ))}
-
-        {/* <div className="space-y-2 w-[350px]">
-          <h2 className="flex-grow text-muted-foreground font-medium text-base">
-            In Progress
-          </h2>
-          <Droppable droppableId="in_progress" type="group">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="space-y-2"
-              >
-                <TaskList tasks={newInProgressTask} />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-
-        <div className="space-y-2 w-[350px]">
-          <h2 className="text-muted-foreground font-medium text-base">
-            Completed
-          </h2>
-          <Droppable droppableId="completed" type="group">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="space-y-2"
-              >
-                <TaskList tasks={newCompletedTask} />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div> */}
       </div>
     </DragDropContext>
   );
