@@ -38,3 +38,8 @@ export const deleteTaskById = async (id: number) => {
   const response = await axiosPrivate.delete<IGenericResponse>(`tasks/${id}`);
   return response.data;
 };
+
+export const getUserTaskSummary = async () => {
+  const response = await axiosPrivate.get(`tasks/summary`);
+  return response.data;
+};
