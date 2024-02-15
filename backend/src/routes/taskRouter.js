@@ -5,6 +5,7 @@ import {
   createTask,
   updateTaskById,
   deleteTaskById,
+  userTaskSummary,
 } from "../controllers/taskController.js";
 
 import {
@@ -22,6 +23,7 @@ router
   .post(validateCreateTask, createTask);
 
 router.route("/current").get(validateGetCurrentUserTasks, getCurrentUserTasks);
+router.route("/summary").get(userTaskSummary);
 
 router
   .route("/:taskId")

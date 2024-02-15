@@ -70,3 +70,41 @@ export const deleteTaskById = asyncErrorHandler(async (req, res) => {
     .status(StatusCodes.OK)
     .json({ status: "success", message: "Task deleted!" });
 });
+
+export const userTaskSummary = asyncErrorHandler(async (req, res) => {
+  const { userId } = req.user;
+
+  const total = await prisma.task.count({
+    where: {
+      userId,
+    },
+  });
+
+  const started = await prisma.task.count({
+    where: {
+      userId,
+      status: "started",
+    },
+  });
+
+  const in_progress = await prisma.task.count({
+    where: {
+      userId,
+      status: "in_progress",
+    },
+  });
+
+  const completed = await prisma.task.count({
+    where: {
+      userId,
+      status: "completed",
+    },
+  });
+
+  res
+    .status(StatusCodes.OK)
+    .json({
+      status: "success",
+      summary: { total, started, in_progress, completed },
+    });
+});
