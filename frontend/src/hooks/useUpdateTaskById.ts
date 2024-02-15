@@ -16,6 +16,9 @@ const useUpdateTaskId = () => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["task"],
+      });
       toast({
         title: "Task Updated!",
         description: data.message,
