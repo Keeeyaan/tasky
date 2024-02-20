@@ -11,6 +11,8 @@ services:
       - 5173:5173
     environment:
       - VITE_API_URL=${VITE_API_URL}
+      - VITE_DUMMY_EMAIL=${VITE_DUMMY_EMAIL}
+      - VITE_DUMMY_PASS=${VITE_DUMMY_PASS}
 
     develop:
       watch:
