@@ -9,7 +9,6 @@ import TaskSkeletonCard from "@/components/task/TaskSkeletonCard";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -51,7 +50,7 @@ const Task = () => {
           </CardContent>
         </Card>
         <div className="sticky h-full space-y-4">
-          <Card>
+          <Card className="min-w-[300px]">
             <CardHeader>
               <CardTitle className="text-xl leading-none">Summary</CardTitle>
             </CardHeader>
@@ -59,8 +58,12 @@ const Task = () => {
               <div className="w-[150px] h-[150px]">
                 <CircularProgressbar
                   className="font-bold shadow-purple-300 rounded-full shadow-lg"
-                  value={summaryPending ? 0 : summary.percentage}
-                  text={`${summaryPending ? 0 : summary.percentage}%`}
+                  value={
+                    summaryPending || !summary.percentage
+                      ? 0
+                      : summary.percentage
+                  }
+                  text={`${summaryPending || !summary.percentage ? 0 : summary.percentage}%`}
                   styles={buildStyles({
                     pathColor: "#884DEE",
                     textSize: "14px",
@@ -128,38 +131,6 @@ const Task = () => {
                 </div>
               </div>
             </CardFooter>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl leading-none">
-                Recently Added Task
-              </CardTitle>
-              <CardDescription>You made 265 sales this month.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-8">
-                <div className="flex items-center">
-                  <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Debug</p>
-                  </div>
-                  <div className="ml-auto font-medium">Started</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">Tasky</p>
-                  </div>
-                  <div className="ml-auto font-medium">Started</div>
-                </div>
-                <div className="flex items-center">
-                  <div className="ml-4 space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      Household Chores
-                    </p>
-                  </div>
-                  <div className="ml-auto font-medium">Started</div>
-                </div>
-              </div>
-            </CardContent>
           </Card>
         </div>
       </div>
