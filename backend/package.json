@@ -5,13 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "npm run build",
     "start": "node server.js | pino-pretty --translateTime --colorize",
     "dev": "nodemon server.js | pino-pretty --translateTime --colorize",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "prisma generate --schema=./src/prisma/schema.prisma",
-    "prisma:generate": "prisma generate --schema=./src/prisma/schema.prisma",
-    "postinstall": "prisma generate --schema=./src/prisma/schema.prisma"
+    "vercel-build": "prisma generate --schema=./src/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "Kean Jieden Villaflor",
