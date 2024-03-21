@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "vercel-build": "prisma generate && prisma migrate deploy && npm run build",
-    "prisma:generate": "prisma generate",
+    "vercel-build": "prisma generate --schema=./src/prisma/schema.prisma && prisma migrate deploy --schema=./src/prisma/schema.prisma && npm run build",
+    "prisma:generate": "prisma generate --schema=./src/prisma/schema.prisma",
     "start": "node server.js | pino-pretty --translateTime --colorize",
     "dev": "nodemon server.js | pino-pretty --translateTime --colorize",
     "test": "echo \"Error: no test specified\" && exit 1"
