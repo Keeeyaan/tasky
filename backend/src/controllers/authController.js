@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma.js";
 import { matchedData } from "express-validator";
 import { StatusCodes } from "http-status-codes";
 
@@ -10,8 +10,6 @@ import {
 } from "../utils/TokenUtils.js";
 import asyncErrorHandler from "../utils/AsyncErrorHandler.js";
 import CustomError from "../utils/CustomError.js";
-
-const prisma = new PrismaClient();
 
 export const register = asyncErrorHandler(async (req, res) => {
   const { email, name, password } = matchedData(req);

@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma.js";
 import { StatusCodes } from "http-status-codes";
 
 import asyncErrorHandler from "../utils/AsyncErrorHandler.js";
-
-const prisma = new PrismaClient();
 
 export const getCurrentUser = asyncErrorHandler(async (req, res) => {
   const { userId } = req.user;

@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma.js";
 import { matchedData } from "express-validator";
 import { StatusCodes } from "http-status-codes";
 
 import asyncErrorHandler from "../utils/AsyncErrorHandler.js";
-
-const prisma = new PrismaClient();
 
 export const getAllTasks = asyncErrorHandler(async (req, res) => {});
 
@@ -101,10 +99,8 @@ export const userTaskSummary = asyncErrorHandler(async (req, res) => {
     },
   });
 
-  res
-    .status(StatusCodes.OK)
-    .json({
-      status: "success",
-      summary: { total, started, in_progress, completed },
-    });
+  res.status(StatusCodes.OK).json({
+    status: "success",
+    summary: { total, started, in_progress, completed },
+  });
 });
