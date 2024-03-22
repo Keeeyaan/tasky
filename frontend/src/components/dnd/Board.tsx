@@ -26,12 +26,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
   useEffect(() => {
     const arrayIdsOrder = JSON.parse(localStorage.getItem("tasky-order")!);
 
-    if (
-      !arrayIdsOrder &&
-      startedTask.length &&
-      inProgressTask.length &&
-      completedTask.length
-    ) {
+    if (!arrayIdsOrder) {
       const startedTaskIdsOrderArray = startedTask.map((task) => task.id);
       const inProgressTaskIdsOrderArray = inProgressTask.map((task) => task.id);
       const completedTaskIdsOrderArray = completedTask.map((task) => task.id);
@@ -48,18 +43,14 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
     let inProgressArray;
     let completedArray;
 
-    if (
-      arrayIdsOrder &&
-      startedTask.length &&
-      inProgressTask.length &&
-      completedTask.length
-    ) {
+    if (arrayIdsOrder) {
       startedArray = arrayIdsOrder.started.map((pos: number) => {
         return startedTask.find((el) => el.id === pos);
       });
       inProgressArray = arrayIdsOrder.in_progress.map((pos: number) => {
         return inProgressTask.find((el) => el.id === pos);
       });
+
       completedArray = arrayIdsOrder.completed.map((pos: number) => {
         return completedTask.find((el) => el.id === pos);
       });
@@ -97,7 +88,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
   const handleOnDragEnd = (results: DropResult) => {
     const { source, destination } = results;
-
+    console.log(source, destination);
     if (!destination) return;
 
     if (
@@ -191,18 +182,15 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         {droppableColumn.map((col) => (
-          <div key={col.id} className="space-y-2 w-[350px]">
-            <h2 className="flex-grow text-muted-foreground font-medium text-base">
-              {col.title}
-            </h2>
+          <div key={col.id} className="space-y-2 w-full">
             <Droppable droppableId={col.id} type="group">
               {(provided) => (
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className="space-y-2"
+                  className="space-y-4"
                 >
                   <TaskList tasks={col.data} />
                   {provided.placeholder}
