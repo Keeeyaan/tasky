@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
 
-const ROUTE = ["/dashboard"];
+const ROUTE = ["/task", "/task/analytic"];
 
 const Navbar = () => {
   const { pathname } = useLocation();
