@@ -80,7 +80,7 @@ const LoginForm = () => {
         onClick={() =>
           login({
             email: import.meta.env.VITE_DUMMY_EMAIL,
-            password: import.meta.env.VITE_DUMMY_PASS,
+            password: import.meta.env.VITE_DUMMY_PASSWORD,
           })
         }
         className="w-full"
