@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 
 import { CardDescription, CardHeader } from "./ui/card";
 
-const ROUTE = ["/dashboard"];
+const ROUTE = ["/task", "/task/analytic"];
 
 const Footer = () => {
   const { pathname } = useLocation();
