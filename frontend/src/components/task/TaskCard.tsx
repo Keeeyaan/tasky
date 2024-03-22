@@ -22,13 +22,15 @@ const TaskCard = ({ task }: TaskCardProps) => {
   const dateFormatted = format(task.createdAt, "dd MMM yy");
 
   return (
-    <Card className="flex-grow">
+    <Card className="flex-grow w-[400px]">
       <CardHeader className="p-4">
         <div className="flex justify-between">
           <div className="flex gap-6 items-center">
             <div className="flex text-sm items-center gap-2 font-light text-muted-foreground">
               <Tag size={14} />
-              <CardDescription className="">{task.tag}</CardDescription>
+              <CardDescription className="text-sky-400">
+                {task.tag}
+              </CardDescription>
             </div>
             <div className="flex items-center font-light gap-2 text-muted-foreground">
               <CalendarFold size={14} />
