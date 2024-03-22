@@ -19,7 +19,7 @@ export const useLoginUser = () => {
         description: data.message,
       });
       setAuth({ accessToken: data.accessToken });
-      navigate("/dashboard", { replace: true });
+      navigate("/task", { replace: true });
     },
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     onError: (error: any) => {
