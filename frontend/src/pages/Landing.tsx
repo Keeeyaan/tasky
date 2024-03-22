@@ -46,7 +46,7 @@ const Landing = () => {
       </div>
     </Wrapper>
   ) : (
-    <Navigate to="/dashboard" replace />
+    <Navigate to="/task" replace />
   );
 };
 
