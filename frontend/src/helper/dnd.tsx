@@ -36,7 +36,6 @@ export const move = (
   const sourceClone = [...source];
   const destClone = [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
-  sourceClone.splice(droppableSource.index, 1);
   destClone.splice(droppableDestination.index, 0, removed);
 
   const arrayIdsOrder = JSON.parse(localStorage.getItem("tasky-order")!);
