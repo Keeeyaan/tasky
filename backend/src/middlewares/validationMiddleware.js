@@ -9,6 +9,13 @@ export const mapValidationErrors = (validateValues) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
+
+        if (errorMessages[0].startsWith("Unauthorized!")) {
+          return next(
+            new CustomError("Unauthorized Access!", StatusCodes.UNAUTHORIZED)
+          );
+        }
+
         const err = new CustomError(errorMessages, StatusCodes.BAD_REQUEST);
         next(err);
       }

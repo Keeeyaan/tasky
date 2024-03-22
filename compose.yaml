@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: tasky_frontend
+    depends_on:
+      - api
+
+    build: ./frontend
+    ports:
+      - 5173:5173
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_DUMMY_EMAIL=${VITE_DUMMY_EMAIL}
+      - VITE_DUMMY_PASS=${VITE_DUMMY_PASS}
+
+    develop:
+      watch:
+      - path: ./frontend/package.json
+        action: rebuild
+      - path: ./frontend/package-lock.json
+        action: rebuild
+      
+      - path: ./frontend
+        target: /app
+        action: sync
+      
+
+  api:
+    container_name: tasky_backend
+    depends_on:
+      - db
+
+    build: ./backend
+    ports:
+      - 8000:8000
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - CORS_ORIGIN=${CORS_ORIGIN}
+      - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+      - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
+      - ACCESS_TOKEN_EXPIRES_IN=${ACCESS_TOKEN_EXPIRES_IN}
+      - REFRESH_TOKEN_EXPIRES_IN=${REFRESH_TOKEN_EXPIRES_IN}
+
+
+    develop:
+      watch:
+      - path: ./backend/package.json
+        action: rebuild
+      - path: ./backend/package-lock.json
+        action: rebuild
+      
+      - path: ./backend
+        target: /app
+        action: sync
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+
+    volumes:
+    - tasky:/data/db
+
+volumes:
+  tasky:

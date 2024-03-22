@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../lib/prisma.js";
 import { matchedData } from "express-validator";
 import { StatusCodes } from "http-status-codes";
 
@@ -8,10 +8,8 @@ import {
   createRefreshToken,
   verifyRefreshToken,
 } from "../utils/TokenUtils.js";
-import asyncErrorHandler from "../utils/asyncErrorHandler.js";
+import asyncErrorHandler from "../utils/AsyncErrorHandler.js";
 import CustomError from "../utils/CustomError.js";
-
-const prisma = new PrismaClient();
 
 export const register = asyncErrorHandler(async (req, res) => {
   const { email, name, password } = matchedData(req);
@@ -50,23 +48,31 @@ export const login = asyncErrorHandler(async (req, res, next) => {
     return next(error);
   }
 
-  const userToken = await prisma.refreshToken.findUnique({
+  const foundRefreshToken = await prisma.refreshToken.findUnique({
     where: {
-      userId: Number(user.id),
+      userId: user.id,
     },
   });
 
-  if (userToken)
+  if (foundRefreshToken)
     await prisma.refreshToken.delete({
       where: {
-        userId: Number(user.id),
+        userId: user.id,
       },
     });
 
-  console.log(userToken);
-
   const accessToken = createAccessToken({ userId: user.id });
-  const refreshToken = createRefreshToken({ userId: user.id });
+  const refreshToken = createRefreshToken({
+    userId: user.id,
+  });
+
+  // Create secure cookie with refresh token
+  res.cookie("token", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   const createdRefreshToken = await prisma.refreshToken.create({
     data: {
@@ -81,12 +87,43 @@ export const login = asyncErrorHandler(async (req, res, next) => {
     status: "success",
     message: "User logged in!",
     accessToken,
-    refreshToken,
   });
 });
 
 export const logout = asyncErrorHandler(async (req, res, next) => {
-  const { token } = matchedData(req);
+  const cookies = req.cookies;
+
+  if (!cookies?.token) return res.sendStatus(StatusCodes.NO_CONTENT);
+
+  const refreshToken = cookies.token;
+
+  // Is refreshToken found in DB?
+  const foundRefreshToken = await prisma.refreshToken.findUnique({
+    where: {
+      token: refreshToken,
+    },
+  });
+
+  if (!foundRefreshToken) {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+    return res.sendStatus(StatusCodes.NO_CONTENT);
+  }
+
+  await prisma.refreshToken.delete({
+    where: {
+      userId: foundRefreshToken.userId,
+    },
+  });
+
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+  });
 
   res.status(StatusCodes.OK).json({
     status: "success",
@@ -94,12 +131,15 @@ export const logout = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-export const token = asyncErrorHandler(async (req, res) => {
+export const refreshToken = asyncErrorHandler(async (req, res, next) => {
   const { token } = matchedData(req);
+
+  const { userId } = verifyRefreshToken(token);
 
   const refreshToken = await prisma.refreshToken.findUnique({
     where: {
       token: token,
+      userId: userId,
     },
   });
 
@@ -107,11 +147,7 @@ export const token = asyncErrorHandler(async (req, res) => {
     return next(new CustomError("Forbidden Access!", StatusCodes.FORBIDDEN));
   }
 
-  const { userId } = verifyRefreshToken(token);
-
   const accessToken = createAccessToken({ userId });
-
-  console.log(accessToken);
 
   res.status(StatusCodes.OK).json({
     status: "success",

@@ -1,4 +1,4 @@
-import { body, header } from "express-validator";
+import { body, cookie } from "express-validator";
 import { mapValidationErrors } from "../middlewares/validationMiddleware.js";
 
 export const validateRegister = mapValidationErrors([
@@ -41,6 +41,10 @@ export const validateLogin = mapValidationErrors([
     ),
 ]);
 
-export const validateToken = mapValidationErrors([
-  body("token").notEmpty().withMessage("Token is required!").isJWT(),
+export const validateRefreshToken = mapValidationErrors([
+  cookie("token")
+    .notEmpty()
+    .withMessage("Unauthorized!")
+    .isJWT()
+    .withMessage("Unathorized"),
 ]);

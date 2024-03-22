@@ -1,16 +1,22 @@
 import { Router } from "express";
-import { login, token, register } from "../controllers/authController.js";
+import {
+  login,
+  logout,
+  refreshToken,
+  register,
+} from "../controllers/authController.js";
 import {
   validateLogin,
   validateRegister,
-  validateToken,
+  validateRefreshToken,
 } from "../validations/authValidation.js";
+import loginLimiter from "../middlewares/loginLimiterMiddleware.js";
 
 const router = Router();
 
 router.post("/register", validateRegister, register);
-router.post("/login", validateLogin, login);
-router.post("/logout", () => {});
-router.post("/token", validateToken, token);
+router.post("/login", loginLimiter, validateLogin, login);
+router.delete("/logout", logout);
+router.get("/refresh", validateRefreshToken, refreshToken);
 
 export default router;

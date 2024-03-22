@@ -1,19 +1,33 @@
+import { ReactNode, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
 
 const Wrapper = ({
   className,
+  title,
+  norMargin,
   children,
 }: {
   className?: string;
+  title?: string;
+  norMargin?: boolean;
   children: ReactNode;
 }) => {
+  useEffect(() => {
+    document.title = `Tasky | ${title || ""}`;
+    window.scroll(0, 0);
+  }, [title]);
+
   return (
-    <div
-      className={cn("mx-auto w-full max-screen-xl px-2.5 md:px-20", className)}
+    <main
+      className={cn(
+        `${
+          norMargin ? "md:px-10" : "md:px-40"
+        } w-full mx-auto px-4  max-screen-xl`,
+        className
+      )}
     >
       {children}
-    </div>
+    </main>
   );
 };
 
