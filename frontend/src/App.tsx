@@ -8,7 +8,8 @@ import {
   Login,
   Register,
   DashboardLayout,
-  Task,
+  Board,
+  Analytic,
 } from "./pages";
 import PersistLogin from "./components/PersistLogin";
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/dashboard",
+        path: "/task",
         element: (
           <PersistLogin>
             <ProtectedRoute>
@@ -46,7 +47,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Task />,
+            element: <Board />,
+          },
+          {
+            path: "analytic",
+            element: <Analytic />,
           },
         ],
       },

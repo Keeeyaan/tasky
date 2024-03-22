@@ -3,5 +3,7 @@ export { default as Landing } from "./Landing";
 export { default as Login } from "./Login";
 export { default as Register } from "./Register";
 export { default as DashboardLayout } from "./DashboardLayout";
+export { default as Board } from "./Board";
 export { default as Task } from "./Task";
+export { default as Analytic } from "./Analytic";
 export { default as Error } from "./Error";
