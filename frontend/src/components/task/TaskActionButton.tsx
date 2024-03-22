@@ -70,9 +70,10 @@ const TaskActionButton = ({ task }: { task: ITask }) => {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit user profile</DialogTitle>
+            <DialogTitle>Edit task</DialogTitle>
             <DialogDescription>
-              Make changes to user profile here. Click save when you're done.
+              Make changes to task information here. Click save when you're
+              done.
             </DialogDescription>
           </DialogHeader>
           <TaskEditForm task={task} />
@@ -88,8 +89,8 @@ const TaskActionButton = ({ task }: { task: ITask }) => {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently terminate the
-              account.
+              This action cannot be undone. This will permanently delete the
+              task.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

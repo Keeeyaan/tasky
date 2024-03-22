@@ -1,4 +1,4 @@
-import { PlusCircle } from "lucide-react";
+import { PlusSquare } from "lucide-react";
 
 import TaskCreateForm from "../form/TaskCreateForm";
 
@@ -16,16 +16,15 @@ const TaskCreateButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="gap-2" size="sm">
-          <PlusCircle />
-          Create Task
+        <Button className="gap-2" size="sm" variant="ghost">
+          <PlusSquare className="text-muted-foreground" size={18} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit user profile</DialogTitle>
+          <DialogTitle>Create new task</DialogTitle>
           <DialogDescription>
-            Make changes to user profile here. Click save when you're done.
+            Fill out the form. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
         <TaskCreateForm />
