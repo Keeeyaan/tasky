@@ -11,6 +11,7 @@ export interface IGenericResponse {
 
 export interface IGetCurrentUserResponse {
   status: string;
+  monthlyTasks?: { month: string; task: number }[];
   user: {
     id: number;
     email: string;
