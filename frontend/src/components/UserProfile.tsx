@@ -52,8 +52,14 @@ const UserProfile = () => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Github className="mr-2 h-4 w-4" />
-          <span>GitHub</span>
+          <a
+            href="https://github.com/Keeeyaan/tasky"
+            target="_blank"
+            className="flex items-center"
+          >
+            <Github className="mr-2 h-4 w-4" />
+            <span>GitHub</span>
+          </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LifeBuoy className="mr-2 h-4 w-4" />
