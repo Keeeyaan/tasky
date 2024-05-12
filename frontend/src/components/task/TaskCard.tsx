@@ -22,7 +22,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
   const dateFormatted = format(task.createdAt, "dd MMM yy");
 
   return (
-    <Card className="flex-grow w-[400px]">
+    <Card className="flex-grow min-w-[300px]">
       <CardHeader className="p-4">
         <div className="flex justify-between">
           <div className="flex gap-6 items-center">
