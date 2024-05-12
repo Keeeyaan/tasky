@@ -7,6 +7,7 @@ import { move, reorder } from "@/helper/dnd";
 
 import { ITask } from "@/types";
 import useUpdateTaskId from "@/hooks/useUpdateTaskById";
+import TaskCreateButton from "../task/TaskCreateButton";
 
 type BoardProps = {
   startedTask: ITask[] | [];
@@ -88,7 +89,7 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
   const handleOnDragEnd = (results: DropResult) => {
     const { source, destination } = results;
-    console.log(source, destination);
+
     if (!destination) return;
 
     if (
@@ -182,9 +183,17 @@ const Board = ({ startedTask, inProgressTask, completedTask }: BoardProps) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex gap-2">
+      <div className="gap-4 flex flex-col 2xl:flex-row justify-center">
         {droppableColumn.map((col) => (
           <div key={col.id} className="space-y-2 w-full">
+            <div
+              className={`${col.title === "Started" ? "bg-lime-400" : col.title === "In Progress" ? "bg-yellow-400" : "bg-purple-400"} w-full p-2 rounded-lg flex text-white justify-between items-center`}
+            >
+              <h1 className="text-white font-medium text-center">
+                {col.title}
+              </h1>
+              <TaskCreateButton />
+            </div>
             <Droppable droppableId={col.id} type="group">
               {(provided) => (
                 <div

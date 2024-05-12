@@ -28,7 +28,10 @@ const Analytic = () => {
     useFetchUserTaskSummary();
 
   return (
-    <Wrapper title="Analytic" className="flex w-full gap-2">
+    <Wrapper
+      title="Analytic"
+      className="flex w-full gap-2 flex-col xl:flex-row"
+    >
       <Card className="mb-4 w-full h-full">
         <CardContent>
           <h1 className="mt-4 mb-2 text-xl text-gray-700 font-semibold text-">
