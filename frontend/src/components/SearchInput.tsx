@@ -1,8 +1,10 @@
 import { Search } from "lucide-react";
 
 import { Input } from "./ui/input";
+import { cn } from "@/lib/utils";
 
 interface SearchInputProps {
+  className?: string;
   type: "text" | "number" | "email" | "password";
   label?: string;
   defaultValue?: string;
@@ -14,6 +16,7 @@ interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
+  className,
   type,
   defaultValue,
   value,
@@ -21,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder,
 }) => {
   return (
-    <div className="relative">
+    <div className={cn(className, `relative`)}>
       <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
         <Search className="text-gray-500" />
       </div>
