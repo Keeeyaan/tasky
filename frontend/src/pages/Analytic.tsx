@@ -20,28 +20,26 @@ import { Separator } from "@/components/ui/separator";
 import Wrapper from "@/components/Wrapper";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import useFetchUserTaskSummary from "@/hooks/useFetchUserTaskSummary";
-
-const data = [
-  { name: "January", student: 6, teacher: 3 },
-  { name: "Febuary", student: 3, teacher: 6 },
-  { name: "March", student: 7, teacher: 4 },
-];
+import useFetchCurrentUser from "@/hooks/useFetchCurrentUser";
 
 const Analytic = () => {
+  const { data: user } = useFetchCurrentUser();
   const { data: summary, isPending: summaryPending } =
     useFetchUserTaskSummary();
 
-  console.log(summary);
   return (
-    <Wrapper title="Analytic" className="flex w-full gap-2">
+    <Wrapper
+      title="Analytic"
+      className="flex w-full gap-2 flex-col xl:flex-row"
+    >
       <Card className="mb-4 w-full h-full">
         <CardContent>
           <h1 className="mt-4 mb-2 text-xl text-gray-700 font-semibold text-">
-            Overview
+            Tasks Timeline Overview
           </h1>
           <Separator />
           <ResponsiveContainer width="100%" height={300}>
-            <AreaChart margin={{ top: 20 }} data={data}>
+            <AreaChart margin={{ top: 20 }} data={user?.monthlyTasks}>
               <defs>
                 <linearGradient id="student" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -53,22 +51,15 @@ const Analytic = () => {
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="month" />
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey="student"
+                dataKey="task"
                 stroke="#4B71F0"
                 fillOpacity={1}
                 fill="url(#student)"
-              />
-              <Area
-                type="monotone"
-                dataKey="teacher"
-                stroke="#01b9ad"
-                fillOpacity={1}
-                fill="url(#teacher)"
               />
             </AreaChart>
           </ResponsiveContainer>

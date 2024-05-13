@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Topbar = () => {
   return (
     <Card className="sticky inset-x-0 top-0 z-30 border-t-0 border-x-0 w-full rounded-none backdrop-blur-lg transition-all">
-      <div className="w-full h-full flex items-center px-40 py-6 justify-between">
+      <div className="w-full h-full flex items-center p-4 md:px-40 md:py-6 justify-between">
         <div className="flex items-center gap-6">
           <Link
             to="/"
@@ -19,11 +19,15 @@ const Topbar = () => {
               alt="linkedlist logo"
               src="/logo.png"
             />
-            <span>Tasky</span>
+            <span className="hidden sm:block">Tasky</span>
           </Link>
         </div>
-        <div className="flex items-center gap-6 text-gray-800">
-          <SearchInput type="text" placeholder="Search" />
+        <div className="flex items-center gap-3 lg:gap-4 text-gray-800">
+          <SearchInput
+            type="text"
+            placeholder="Search"
+            className="hidden lg:block"
+          />
           <div className="p-2 border rounded-full">
             <Bell size={20} />
           </div>

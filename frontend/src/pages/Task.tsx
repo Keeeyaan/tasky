@@ -2,8 +2,6 @@ import { Loader2, SlidersHorizontal } from "lucide-react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import useFetchCurrentUser from "@/hooks/useFetchCurrentUser";
-
 import Wrapper from "@/components/Wrapper";
 import TaskSkeletonCard from "@/components/task/TaskSkeletonCard";
 import {
@@ -17,9 +15,10 @@ import TaskCreateButton from "@/components/task/TaskCreateButton";
 import Board from "@/components/dnd/Board";
 import { Separator } from "@/components/ui/separator";
 import useFetchUserTaskSummary from "@/hooks/useFetchUserTaskSummary";
+import useFetchCurrentUserTaskByStatus from "@/hooks/useFetchCurrentUserTaskByStatus";
 
 const Task = () => {
-  const { data: user, isPending, isError } = useFetchCurrentUser();
+  const { data: task, isPending, isError } = useFetchCurrentUserTaskByStatus();
   const { data: summary, isPending: summaryPending } =
     useFetchUserTaskSummary();
 
@@ -42,9 +41,9 @@ const Task = () => {
               <p className="text-red-500">Something went wrong!</p>
             ) : (
               <Board
-                startedTask={user.startedTask}
-                inProgressTask={user.inProgressTask}
-                completedTask={user.completedTask}
+                startedTask={task.startedTask}
+                inProgressTask={task.inProgressTask}
+                completedTask={task.completedTask}
               />
             )}
           </CardContent>

@@ -1,11 +1,11 @@
 import Wrapper from "@/components/Wrapper";
 
-import useFetchCurrentUser from "@/hooks/useFetchCurrentUser";
+import useFetchCurrentUserTaskByStatus from "@/hooks/useFetchCurrentUserTaskByStatus";
 import TaskSkeletonCard from "@/components/task/TaskSkeletonCard";
 import Board from "@/components/dnd/Board";
 
 const Dashboard = () => {
-  const { data: user, isPending, isError } = useFetchCurrentUser();
+  const { data: task, isPending, isError } = useFetchCurrentUserTaskByStatus();
 
   return (
     <Wrapper title="Board">
@@ -15,9 +15,9 @@ const Dashboard = () => {
         <p className="text-red-500">Something went wrong!</p>
       ) : (
         <Board
-          startedTask={user.startedTask}
-          inProgressTask={user.inProgressTask}
-          completedTask={user.completedTask}
+          startedTask={task.startedTask}
+          inProgressTask={task.inProgressTask}
+          completedTask={task.completedTask}
         />
       )}
     </Wrapper>

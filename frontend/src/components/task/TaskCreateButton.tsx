@@ -16,8 +16,12 @@ const TaskCreateButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="gap-2" size="sm" variant="ghost">
-          <PlusSquare className="text-muted-foreground" size={18} />
+        <Button
+          className="gap-2 h-6 px-1 text-white hover:text-muted-foreground transition-all"
+          size="sm"
+          variant="ghost"
+        >
+          <PlusSquare size={18} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
