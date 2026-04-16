@@ -14,7 +14,8 @@
   "author": "Kean Jieden Villaflor",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.9.0",
+    "@prisma/adapter-neon": "^7.7.0",
+    "@prisma/client": "^7.7.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -27,7 +28,8 @@
     "pino-pretty": "^10.3.1"
   },
   "devDependencies": {
-    "dotenv": "^16.4.1",
-    "nodemon": "^3.0.3"
+    "dotenv": "^16.6.1",
+    "nodemon": "^3.0.3",
+    "prisma": "^7.7.0"
   }
 }
